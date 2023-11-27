@@ -6,11 +6,12 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:53 by rabouzia          #+#    #+#             */
-/*   Updated: 2023/11/27 11:52:20 by rabouzia         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:08:05 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+
 #include <stdarg.h>
 
 int	check(const char c, int i)
@@ -33,10 +34,6 @@ int	check(const char c, int i)
 		hex_up();
 	if (c == '%')
 		ft_putchar("%%");
-    if (c == '-0')
-        ???;
-    if ( c == '# +')
-        ???;
 }
 
 void	ft_putchar(char c)
@@ -56,7 +53,12 @@ void	ft_putstr(char *str)
 	}
 }
 
-char	print_adress;
+void *print_adress(void *str)
+{
+	long long i;
+	i(long long) str;
+	
+}
 
 void	ft_putnbr(int nb)
 {
@@ -79,9 +81,17 @@ void	ft_putnbr(int nb)
 int		base_10;
 int		uns_int;
 
-char	hex_low;
+char	hex_low(char *str)
+{
+	char *hex;
+	hex = "0123456789abcdef";
+}
 
-char	hex_up;
+char	hex_up(char *str)
+{
+	char *hex;
+	hex = "0123456789ABCDEF";
+}
 
 int	search_flag(const char *str)
 {
