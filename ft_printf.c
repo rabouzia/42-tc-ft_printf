@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:53 by rabouzia          #+#    #+#             */
-/*   Updated: 2023/11/29 17:35:11 by rabouzia         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:51:53 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,19 @@ int	search_flag(const char *str)
 			i++;
 	}
 }
-int	check(va_list args, char c)
+
+int print_string(const char *s)
+{
+	ft_putstr();
+	return(ft_strlen);
+}
+
+int	check(va_list *args, char c)
 {
 	if (c == 'c')
-		ft_putchar();
+		ft_putchar(va_arg(*args, int));
 	if (c == 's')
-		ft_putstr();
+		return (print_string(va_arg(*args, char *)))
 	if (c == 'p')
 		print_adress();
 	if (c == 'd')
