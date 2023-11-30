@@ -20,7 +20,6 @@ int	is_valid_base(char *base)
     {
         if (base[i] == '+' || base[i] == '-' || (base[i] >= 9 && base[i] <= 13) || base[i] == ' ')
             return 0;
-
         j = i + 1;
         while (base[j++])
         {
@@ -30,35 +29,49 @@ int	is_valid_base(char *base)
     }
     return 1;
 }
+int get_len(int n)
+{
+    int i;
+
+    i = 0;
+    if (n < 0)
+    {
+        i++;
+        n *= -1;
+    }
+}
 
 void ft_putchar(char c)
 {
     write(1, &c, 1);
 }
 
-void ft_putnbr_base(int nbr, char *base)
+int ft_putnbr_base(int nbr, char *base)
 {
-    long nb = nbr;
     long a;
+    int i;
 
+    i = 0;
     if (!is_valid_base(base))
         return;
-
     a = ft_strlen(base);
-
-    if (nb < 0)
+    if (nbr < 0)
     {
-        nb = -nb;
+        nbr = -nbr;
         ft_putchar('-');
+        i++;
     }
-
-    if (nb >= a)
+    if (nbr >= a)
     {
-        ft_putnbr_base(nb / a, base);
-        ft_putnbr_base(nb % a, base);
+        ft_putnbr_base(nbr / a, base);
+        ft_putnbr_base(nbr % a, base);
     }
     else
-        ft_putchar(base[nb]);
+    {
+        ft_putchar(base[nbr]);
+        i++;
+    }
+    return();
 }
 
 int main(int ac, char **av)

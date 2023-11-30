@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:53 by rabouzia          #+#    #+#             */
-/*   Updated: 2023/11/30 15:32:31 by rabouzia         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:04:22 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,13 @@ int	check(va_list *args, char c)
 	// ft_putnbr();
 	// if (c == 'u')
 	//	uns_int();
-	// if (c == 'x' || c == 'X' || c == 'i')
-	//	ft_putnbr_base(' ');
-	// if (c == '%')
+	if (c == 'x') 
+		ft_putnbr_base(va_arg(*args, ));
+	//if (c == 'X')
+	//	ft_putnbr_base();
+	//if (c == 'i')
+	//	ft_putnbr_base();
+	/// if (c == '%')
 	// ft_putchar("%%");
 	return (1);
 }
@@ -130,7 +134,9 @@ int	ft_printf(const char *str, ...)
 
 int	main(void)
 {
-	char moi = 'R';
-	ft_printf("Je m'appelle %c", moi);
-	// printf("Je m'appelle %c", moi);
+	char moi = 'l';
+	char *m = "Ramzy";
+	ft_printf("my printf: Je m'appe%cle %s\n", moi, m);
+	printf("le og printf: Je m'appe%cle %s\n", moi, m);
+
 }
