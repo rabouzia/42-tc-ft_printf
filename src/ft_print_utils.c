@@ -3,36 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 09:44:24 by ramzerk           #+#    #+#             */
-/*   Updated: 2023/12/01 10:08:40 by ramzerk          ###   ########.fr       */
+/*   Updated: 2023/12/01 16:25:28 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 #include "../include/libft.h"
 
-int	ft_strlen(char *str)
-{
-    int len = 0;
-    while (str[len] != '\0')
-        len++;
-    return len;
-}
-
 void	ft_putstr(const char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-	{
+	while (str[i++])
 		ft_putchar(str[i]);
-		i++;
-	}
 }
-
 
 int get_len(int n)
 {
@@ -44,8 +32,15 @@ int get_len(int n)
         i++;
         n *= -1;
     }
+    while (n == 0)
+        return 1;
+    while(n > 0)
+    {
+        n/=10;
+        i++;
+    }
+    return (i);
 }
-
 
 int	ft_putchar(const char c)
 {

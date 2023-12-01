@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 09:49:01 by ramzerk           #+#    #+#             */
-/*   Updated: 2023/12/01 10:10:43 by ramzerk          ###   ########.fr       */
+/*   Updated: 2023/12/01 18:07:27 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,22 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-void	ft_putstr(const char *str);
+void			ft_putstr(const char *str);
 
-int get_len(int n);
+int				get_len(int n);
 
-int	ft_putchar(const char c);
+int				ft_strlen(const char *);
 
-int	print_string(const char *s);
+int				ft_putchar(const char c);
 
-int	is_valid_base(char *base);
+int				print_string(const char *s);
 
-int ft_putnbr_base(int nbr, char *base);
+unsigned int	is_valid_base(char *base);
 
-int	check(va_list *args, char c);
+long			ft_putnbr_base(long nbr, char *base);
 
-int	ft_printf(const char *str, ...);
+int				check(va_list *args, char c);
+
+int				ft_printf(const char *str, ...);
 
 #endif
