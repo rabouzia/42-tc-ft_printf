@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:53 by rabouzia          #+#    #+#             */
-/*   Updated: 2023/12/01 18:56:19 by rabouzia         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:17:08 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ int	check(va_list *args, char c)
 		ft_putchar(va_arg(*args, int));
 	if (c == 's') // ok
 		return (print_string(va_arg(*args, char *)));
-	// if (c == 'p')
-	//	print_adress(); //attention a la valeur NULL cas special , print 0x puis le truc en hexa
+	if (c == 'p')
+		print_adress(va_arg(*args, void *), "0123456789abcdef");
+	/*attention a la valeur NULL cas special ,
+	print 0x puis le truc en hexa*/
 	if (c == 'x')
 		ft_putnbr_base(va_arg(*args, unsigned int), "0123456789abcdef");
 	if (c == 'X')
@@ -63,8 +65,11 @@ int	ft_printf(const char *str, ...)
 
 int	main(void)
 {
-	unsigned int moi = -237678213;
+	int	moi;
+	int	p;
 
-	ft_printf("usigned int: %u\n", -2);
-	printf("        int: %u\n", -2);
+	moi = NULL;
+	p = &moi;
+	ft_printf("adress: %p\n", p);
+	printf("adress: %p\n", p);
 }
