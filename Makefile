@@ -1,33 +1,31 @@
-SRCS = 
 
-OBJS = ${SRCS:.c=.o}
+N_TEMP = temp.a
 
-INCS = includes
+NAME = libftprintf.a
 
-NAME = libft.a
+SRCS =  src/ft_printf.c \
+		src/ft_print_utils.c\
+		src/ft_print_base.c \
 
-LIBC = ar rc
+CC = gcc
 
-LIBR = ranlib
+FLAGS = -c -Wall -Wextra -Werror
 
-CC			= gcc
+INCLUDES = -I./includes
 
-RM			= rm -f
+OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -I.
+$(NAME): $(OBJS)
+	$(CC) $(FLAGS) $(INCLUDES) $(SRCS)
+	ar -rcs $(NAME) $(OBJS)
 
-%.o: %.c
-		${CC} ${CFLAGS} -c -I ${INCS} $< -o ${<:.c=.o}
+all : $(NAME)
 
-${NAME}: ${OBJS}
-		${LIBC} ${NAME} ${OBJS}
-		${LIBR} ${NAME}
+clean :
+	rm -rf $(SURPL_O) 
+	rm -rf $(OBJS)
 
-all: ${NAME}
-
-clean:
-		${RM} ${OBJS}
 fclean : clean
-		${RM} ${NAME}
+	rm -rf $(NAME)
 
-re: fclean all
+re : fclean all

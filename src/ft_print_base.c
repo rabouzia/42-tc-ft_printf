@@ -6,12 +6,11 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 09:47:00 by ramzerk           #+#    #+#             */
-/*   Updated: 2023/12/03 17:51:33 by rabouzia         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:19:04 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-#include "../include/libft.h"
 
 unsigned int	is_valid_base(char *base)
 {
@@ -36,14 +35,36 @@ unsigned int	is_valid_base(char *base)
 	return (1);
 }
 
-long	ft_putnbr_base(long nbr, char *base)
+long	ft_putnbr_base_unsigned(unsigned long nbr, char *base)
 {
-	long	a;
-	long	i;
+	unsigned long	a;
+	unsigned long	i;
 
 	i = 0;
 	if (!is_valid_base(base))
-		return (-12);
+		return (0);
+	a = ft_strlen(base);
+	if (nbr >= a)
+	{
+		ft_putnbr_base(nbr / a, base);
+		ft_putnbr_base(nbr % a, base);
+	}
+	else
+	{
+		ft_putchar(base[nbr]);
+		i++;
+	}
+	return (i);
+}
+
+int	ft_putnbr_base(int nbr, char *base)
+{
+	long	a;
+	int	i;
+
+	i = 0;
+	if (!is_valid_base(base))
+		return (0);
 	a = ft_strlen(base);
 	if (nbr < 0)
 	{
@@ -64,12 +85,28 @@ long	ft_putnbr_base(long nbr, char *base)
 	return (i);
 }
 
-int	ft_strlen(const char *str)
+long	ft_putnbr(int nb)
 {
-	int	i;
+	long	nbr;
+	long		i;
 
+	nbr = nb;
 	i = 0;
-	while (str[i])
+	if (nbr < 0)
+	{
+		nbr = -nbr;
+		ft_putchar('-');
 		i++;
+	}
+	if (nbr > 9)
+	{
+		ft_putnbr(nbr / 10);
+		ft_putnbr(nbr % 10);
+	}
+	else
+	{
+		ft_putchar(nbr + '0');
+		i++;
+	}
 	return (i);
 }
