@@ -6,7 +6,7 @@ NAME = libftprintf.a
 SRCS =  src/ft_printf.c \
 		src/ft_print_utils.c\
 		src/ft_print_base.c \
-		src/ft_gpadidey
+		src/ft_gpadidey.c
 
 CC = gcc
 
