@@ -6,7 +6,7 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:53 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/09/30 23:39:01 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/09/30 23:45:25 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check(va_list *args, char c)
 	if (c == 'u')
 		return (ft_putnbr_base((long)va_arg(*args, unsigned int), dec));
 	if (c == 'f')
-		return 
+		return 0;
 	return (0);
 }
 
@@ -65,7 +65,7 @@ int	ft_printf(const char *str, ...)
 int main()
 {
 	ft_printf("%d\n", 32);
-	printf("%-");
+	// printf("%-");
 }
 
 
