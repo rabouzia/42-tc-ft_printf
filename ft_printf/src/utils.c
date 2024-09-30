@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_base.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:47:00 by ramzerk           #+#    #+#             */
-/*   Updated: 2023/12/05 18:14:56 by rabouzia         ###   ########.fr       */
+/*   Created: 2023/12/05 18:17:54 by rabouzia          #+#    #+#             */
+/*   Updated: 2024/09/30 23:19:57 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
-long	ft_putnbr_base_unsigned(unsigned long nbr, char *base)
+int	ft_strlen(const char *str)
 {
-	unsigned long	a;
-	unsigned long	i;
+	int	i;
 
 	i = 0;
-	a = ft_strlen(base);
-	if (nbr >= a)
-	{
-		i += ft_putnbr_base_unsigned(nbr / a, base);
-		i += ft_putnbr_base_unsigned(nbr % a, base);
-	}
-	else
-	{
-		ft_putchar(base[nbr]);
+	while (str[i])
 		i++;
-	}
 	return (i);
 }
 
-int	ft_putnbr_base(long nbr, char *base)
+int	ft_putchar(const char c)
 {
-	if (nbr < 0)
-		return (ft_putchar('-') + ft_putnbr_base_unsigned(-nbr, base));
-	return (ft_putnbr_base_unsigned(nbr, base));
+	return (write(1, &c, 1));
+}
+
+int	ft_putstr(const char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (ft_putstr("(null)"));
+	while (str[i])
+		ft_putchar(str[i++]);
+	return (i);
 }
 
 long	ft_putnbr(int nb)
