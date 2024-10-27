@@ -3,118 +3,160 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:55:53 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/09/30 23:45:25 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/10/02 17:16:21 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-int	check(va_list *args, char c)
+char	*ft_substr(char *str, int index, int len)
 {
-	if (c == 'c')
-		return(ft_putchar(va_arg(*args, int)));
-	if (c == 's')
-		return (ft_putstr(va_arg(*args, char *)));
-	if (c == 'p')
-		return (print_address((unsigned long)va_arg(*args, void *),hex));
-	if (c == 'x')
-		return (ft_putnbr_base(va_arg(*args, unsigned int), hex));
-	if (c == 'X')
-		return (ft_putnbr_base(va_arg(*args, unsigned int), HEX));
-	if (c == 'i' || c == 'd')
-		return (print_decimal(va_arg(*args, int)));
-	if (c == '%')
-		return(ft_putchar('%'));
-	if (c == 'u')
-		return (ft_putnbr_base((long)va_arg(*args, unsigned int), dec));
-	if (c == 'f')
-		return 0;
-	return (0);
-}
-
-
-
-int	ft_printf(const char *str, ...)
-{
-	va_list	list;
+	char	*res;
 	int		i;
-	int		res;
 
-	va_start(list, str);
-	if ((str[0] == '%' && str[1] == '\0') || !str)
-		return (-1);
-	i = -1;
-	res = 0;
-	while (str[++i])
-	{
-		if (str[i] == '%' && str[i + 1])
-			res += check(&list, str[++i]);
-		else
-		{
-			ft_putchar(str[i]);
-			res++;
-		}
-	}
-	va_end(list);
+	i = 0;
+	if (!str)
+		return (NULL);
+	if (index > ft_strlen(str))
+		return (NULL);
+	res = malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	while (str[index] && len--)
+		res[i++] = str[index++];
+	res[i] = 0;
 	return (res);
 }
 
-int main()
+int	simple_flag(va_list *arg, char c)
 {
-	ft_printf("%d\n", 32);
-	// printf("%-");
+	if (c == 'c')
+		return (ft_putchar(va_arg(*arg, char)));
+	if (c == 's')
+		return (ft_putstr(va_arg(*arg, char *)));
+	if (c == 'p')
+		return (0);
+	if (c == 'd')
+		return (0);
+	if (c == 'i')
+		return (0);
+	if (c == 'u')
+		return (0);
+	if (c == 'x')
+		return (0);
+	if (c == 'X')
+		return (0);
+	if (c == 'f')
+		return (0);
+	if (c == 'o')
+		return (0);
+	if (c == '%')
+		return (2);
 }
 
+int	read_flag(va_list *arg, int i, char *str)
+{
+	i++;
+	if (strchr("cspdiuxX", str[i + 1]))
+		return (simple_flag(arg, str[i + 1]));
+}
 
-// #include <stdarg.h>
-// #include <stdio.h>  // Assuming you have the implementations of ft_putchar, ft_putstr, etc.
+int	ft_strchr(char *str, char c)
+{
+	int	i;
 
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (0);
+}
 
-// // Declare all the functions you're calling, assuming they're implemented elsewhere
-// int ft_putchar(int c);
-// int ft_putstr(char *str);
-// int print_address(unsigned long addr, char *base);
-// int ft_putnbr_base(unsigned int nbr, char *base);
-// int print_decimal(int n);
+int	ft_read(char *str)
+{
+	"% 10d" if ()
+}
 
-// // Individual functions for each specifier
-// int handle_char(va_list *args) { return ft_putchar(va_arg(*args, int)); }
-// int handle_string(va_list *args) { return ft_putstr(va_arg(*args, char *)); }
-// int handle_address(va_list *args) { return print_address((unsigned long)va_arg(*args, void *), "0123456789abcdef"); }
-// int handle_hex_lower(va_list *args) { return ft_putnbr_base(va_arg(*args, unsigned int), "0123456789abcdef"); }
-// int handle_hex_upper(va_list *args) { return ft_putnbr_base(va_arg(*args, unsigned int), "0123456789ABCDEF"); }
-// int handle_decimal(va_list *args) { return print_decimal(va_arg(*args, int)); }
-// int handle_unsigned(va_list *args) { return ft_putnbr_base(va_arg(*args, unsigned int), "0123456789"); }
-// int handle_percent(va_list *args) { (void)args; return ft_putchar('%'); }  // % doesn't use args
+int	ft_putnbr_base2(int nbr, char *base)
+{
+	int	a;
 
-// // Mapping specifiers to corresponding functions
-// t_func get_function(char c) {
-//     if (c == 'c') 
-// 		return handle_char;
-//     if (c == 's') 
-// 		return handle_string;
-//     if (c == 'p') 
-// 		return handle_address;
-//     if (c == 'x') 
-// 		return handle_hex_lower;
-//     if (c == 'X') 
-// 		return handle_hex_upper;
-//     if (c == 'i' || c == 'd') 
-// 		return handle_decimal;
-//     if (c == 'u') return 
-// 		handle_unsigned;
-//     if (c == '%') 
-// 		return handle_percent;
-//     return NULL;  // If no valid specifier is found
-// }
+	ft_strlen(base);
+	if (nbr > 9)
+	{
+		ft_putnbr_base2(nbr / a, base);
+		ft_putnbr_base2(nbr % a, base);
+	}
+	else
+		ft_putchar(base[nbr]);
+	return (1);
+}
 
-// int check(va_list *args, char c) {
-//     t_func handler = get_function(c);
-//     if (handler)
-//         return handler(args);  // Call the appropriate function
-//     return 0;  // If the specifier is invalid, return 0
-// }
- 
+int	checker(va_list *arg, char *str)
+{
+	int	i;
+	int	a;
+	int	len;
+
+	a = 0;
+	i = 0;
+	while (str[len])
+		len++;
+	while (str[i++] != '%')
+		ft_putchar(str[i]);
+	while (str[i])
+	{
+		if (str[i] == '%')
+			i += read_flag(arg, i, str);
+		else if (ft_strchr(END, str[i + 1]))
+			return (simple_flag(arg, str[i + 1]));
+		if (ft_strchr(FLAGS, str[i + 1]))
+		{
+			while (ft_strchr(END, str[i]) == 0)
+			{
+				a++;
+				i++;
+			}
+			ft_read(ft_substr(str, i, a));
+		}
+		else
+			ft_putchar(str[i]);
+		i++;
+	}
+}
+
+int	ft_printf(const char *str, ...)
+{
+	va_list	arg;
+	int		value;
+
+	value = 0;
+	value += checker(&arg, str);
+	va_start(arg, str);
+	va_end(arg);
+}
+
+int	main(void)
+{
+	ft_printf("% 1ad\n", 32);
+	printf("%010d\n", 32);
+	printf("% 010d\n", 32);
+	printf("% 14d\n", 32);
+	printf("%-010d", 123);
+	printf("%010d", 123);
+	printf("%-10.2f", 123.45);
+	printf("%010.2f", 123.45);
+	printf("%-10s", "abc");
+	printf("%010s", "abc");
+	printf("%.3s", "abcdef");
+	printf("%10.3d", 123);
+	printf("%-10.3d", 123);
+}

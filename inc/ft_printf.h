@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 09:49:01 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/09/30 23:22:55 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/10/02 17:06:00 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,25 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-#define HEX "0123456789ABCDEF"
-#define hex "0123456789abcdef"
-#define dec "0123456789"
+# define H_HEX "0123456789ABCDEF"
 
-typedef int (*t_func)(va_list *args);  // Define a function pointer type that takes va_list* and returns int
+# define L_HEX "0123456789abcdef"
+
+# define DEC "0123456789"
+
+# define FLAGS "-+ 0#"
+
+# define END "cspdiuxX%"
+
+typedef struct t_print
+{
+	
+};
+
 
 int				check(va_list *args, char c);
 
@@ -43,11 +54,10 @@ int				print_decimal(int a);
 
 long			ft_putnbr(int nb);
 
-int				ft_putchar(const char c); 
+int				ft_putchar(const char c);
 
 int				ft_strlen(const char *str);
 
 int				ft_putstr(const char *str);
-
 
 #endif
